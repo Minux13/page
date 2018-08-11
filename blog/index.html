@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Minux</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta content="Minux - Blog" name="description">
+    <meta content="Minux" name="author">
+    <!--Fav-->
+    <link href="images/m.ico" rel="shortcut icon">
+    <link href="css/blog.css" rel="shortcut icon">
+    
+    <!--[if lt IE 9]>
+       <script type="text/javascript" src="js/html5shiv.min.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <style>
+	body{
+	  font-family: 'Open Sans', sans-serif;
+	}
+	#container{
+		margin: 70px;
+    		box-shadow: 0px 10px 30px #666;
+		padding: 45px;	
+	}
+    	.quote{
+	  color: #666;	
+    	  font-style: italic;
+	}
+@media only screen and (max-width: 600px) {
+    #container{
+		margin: 20px;
+    		box-shadow: 0px 10px 30px #666;
+		padding: 25px;	
+    }
+}
+    </style>
+  </head>
+  <body>
+<div id="container">
+<h3 class="">¿Por qué es importante si JavaScript es tipado o no?</h3>
+<p class="">Una definición aproximada de lo que es tipado, la misma que parece impulsar la redacción de la especificación ES5.1 http://www.ecma-international.org/ecma-262/5.1/), Un tipo es un conjunto de características intrínsecas integradas que identifica de manera única el comportamiento de un valor particular y lo distingue de otros valores, tanto para el motor como para el desarrollador.</p>
+
+<blockquote class="quote">Algorithms within this specification manipulate values each of which has an associated type. The possible value types are exactly those defined in this clause. Types are further sub classified into ECMAScript language types and specification types.<br><br>
+An ECMAScript language type corresponds to values that are directly manipulated by an ECMAScript programmer using the ECMAScript language. The ECMAScript language types are Undefined, Null, Boolean, String, Number, and Object.</blockquote>
+
+<p>
+JavaScript defines seven built-in types:
+
+null
+undefined
+boolean
+number
+string
+object
+symbol -- added in ES6!
+Todos estos tipos excepto objetct son llamados "primitivos".
+El operador typeof inspecciona el tipo del valor dado y siempre devuelve un string con los siete tipos; sorprendentemente, no hay una coincidencia exacta de 1 a 1 con los siete tipos incorporados que acabamos de enumerar.
+</p>
+<p>typeof null === "object"; // true</p>
+<p> Este error original en JS ha persistido durante casi dos décadas, y probablemente nunca será reparado porque hay demasiado contenido web existente que se basa en su comportamiento defectuoso </p>
+Null is the only primitive value that is "falsy" (aka false-like; see Chapter 4) but that also returns "object" from the typeof check.
+<h3>Funciones</h3>
+Un objeto function es un subtipo de Object, se denomina "objeto invocable", un objeto que tiene una propiedad interna [[Call]] que le permite invocarlo.
+El hecho de que las funciones sean en realidad objetos es bastante útil. Lo más importante es que pueden tener propiedades
+El objeto función tiene una propiedad de longitud establecida en la cantidad de parámetros formales con los que se declara.
+
+Arreglos son solo objetos Es más apropiado pensar en ellos también como un "subtipo" de objeto, en este caso con las características adicionales de estar indexado numéricamente (as opposed to just being string-keyed like plain objects) y mantener una propiedad .length actualizada automáticamente.
+</div>
+En JavaScript, las variables no tienen tipos - los valores tienen tipos. Las variables pueden contener cualquier valor, en cualquier momento. Otra forma de pensar sobre los tipos de JS es que JS no tiene "aplicación de tipos", ya que el motor no insiste en que una variable siempre contenga valores del mismo tipo inicial con el que comienza.
+El valor 42 tiene un tipo de número intrínseco, y su tipo no se puede cambiar. Se puede crear otro valor, como "42" con el tipo de cadena, a partir del valor numérico 42 a través de un proceso llamado coerción (ver Capítulo 4).
+Si usa typeof contra una variable, no pregunta "¿cuál es el tipo de variable?" como puede parecer, ya que las variables JS no tienen tipos. En cambio, pregunta "¿cuál es el tipo de valor en la variable?"
+
+Es tentador para la mayoría de los desarrolladores pensar en la palabra "indefinido" y pensar en ello como un sinónimo de "no declarado". Sin embargo, en JS, estos dos conceptos son bastante diferentes.
+
+Una variable "indefinida" es aquella que ha sido declarada en el alcance accesible, pero por el momento no tiene otro valor en ella. Por el contrario, una variable "no declarada" es aquella que no se ha declarado formalmente en el alcance accesible. Una confusión molesta es el mensaje de error que los navegadores asignan a esta condición. Como puede ver, el mensaje es "b no está definido", que por supuesto es muy fácil y razonable de confundir con "b no está definido".
+
+También hay un comportamiento especial asociado con typeof ya que se relaciona con variables no declaradas que refuerza aún más la confusión. Considerar:
+var a;
+typeof a; // "undefined"
+typeof b; // "undefined"
+
+Observe que no se produjo ningún error cuando ejecutamos typeof b, aunque b es una variable no declarada. Este es un protector de seguridad especial en el comportamiento de typeof.
+
+Nota: Muchos desarrolladores creen que nunca debe haber variables en el espacio de nombres global, y que todo debe estar contenido en módulos y espacios de nombres privados / separados. Esto es genial en teoría, pero casi imposible en la práctica; ¡aún así es un buen objetivo para luchar! Afortunadamente, ES6 agregó soporte de primera clase para los módulos, lo que finalmente hará que sea mucho más práctico.
+
+
+    <script src="js/blog.js" type="text/javascript"></script>
+  </body>
+</html>
